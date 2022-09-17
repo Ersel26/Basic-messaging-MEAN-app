@@ -1,0 +1,66 @@
+<div class="container" id="main-container" style="margin-top: 2rem;">
+    
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" (click)="drop()">
+        Sort by
+    </button>
+    <ul class="menu" id="options" style="display: none; list-style-type: none;">
+        <li><button class="btn btn-light btn-sm" style="margin-top: 0.1rem;" (click)="sortUserType()">User Type</button></li>
+        <li><button class="btn btn-light btn-sm" style="margin-top: 0.1rem;" (click)="sortUserName()">Username</button></li>
+    </ul>
+    
+    <div style="margin-bottom: 2rem;"></div>
+    <table class="table table-bordered">
+        <thead class="table-info">
+            <tr>
+                <th class="col">User type</th>
+                <th class="col">Username</th>
+                <th class="col">Name</th>
+                <th class="col">Surname</th>
+                <th class="col" style="width: 15rem;">Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of userList; let i = index">
+                <td>{{user.usertype}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.surname}}</td>
+                <td class="text-center edit-block" style="display: flex; gap: 2rem;">
+                    <span>
+                        <button type="button" class="btn btn-info btn-sm" (click)="displayUser(user)">Display</button>
+                    </span>
+                    <span [routerLink]="['/register','update',user.username]">
+                        <button type="button" class="btn btn-success btn-sm">Edit</button>
+                    </span>
+                    <span>
+                        <button type="button" class="btn btn-danger btn-sm" (click)="deleteUser(user, i)">Delete</button>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="updateRegisterArea" style="display: flex; justify-content: center; gap: 2rem;">
+    <span [routerLink]="['/register','create']">
+        <button type="button" class="btn btn-success">Create New User</button>
+    </span>
+    <span routerLink='/admin'>
+        <button type="button" class="btn btn-danger">Back To Main Page</button>
+    </span>
+    <div id="page-navigation" style="display: flex; justify-content:last baseline; gap: 0.5rem;">
+        <span>
+            <button type="button" class="btn btn-info" (click)="prevPage()">previous page</button>
+        </span>
+        <span>
+            <button type="button" class="btn btn-info" (click)="nextPage()">next page</button>
+        </span>
+    </div>
+</div>
+
+<div id="custom-modal" style="display: none;">
+    <div id="modal-header"></div>
+    <div id="modal-content"></div>
+    <div style="height: 1rem;"></div>
+    <button type="button" class="btn btn-danger" id="modal-close" (click)="onUserClose()" style="width: 6rem;">Close</button>
+</div>

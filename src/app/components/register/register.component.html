@@ -1,0 +1,137 @@
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="card-body">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="inputUsertype">User type</label>
+                    <select
+                        class="custom-select form-control"
+                        (change)="updateProfile($event.target.value)"
+                        formControlName="usertype"
+                    >
+                        <option *ngIf="!user" value="">Choose...</option>
+                        <option *ngIf="user" value="" selected="selected"> {{ user.usertype }} </option>
+                        <option
+                        *ngFor="let usertype of userType"
+                        value="{{ usertype }}"
+                        >
+                        {{ usertype }}
+                        </option>
+                    </select>
+                    <!-- error -->
+                    <div
+                        class="invalid-feedback"
+                        *ngIf="submitted && myForm['usertype'].errors?.['required']"
+                    >
+                        Choose usertype.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputUsername">username</label>
+                    <input class="form-control" type="text" formControlName="username" [attr.placeholder]="this.user ? this.user.username : ''"/>
+                    <!-- error -->
+                    <div
+                        class="invalid-feedback"
+                        *ngIf="submitted && myForm['username'].errors?.['required']"
+                    >
+                        Username is required.
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="!user">
+                    <label for="inputPassword">password</label>
+                    <input class="form-control" type="password" formControlName="password"/>
+                    <!-- error -->
+                    <div
+                        class="invalid-feedback"
+                        *ngIf="submitted && myForm['password'].errors?.['required']"
+                    >
+                        Password is required.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputName">name</label>
+                    <input class="form-control" type="text" formControlName="name" [attr.placeholder]="this.user ? this.user.name : ''"/>
+                    <!-- error -->
+                    <div
+                        class="invalid-feedback"
+                        *ngIf="submitted && myForm['name'].errors?.['required']"
+                    >
+                        Name is required.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputSurname">surname</label>
+                    <input class="form-control" type="text" formControlName="surname" [attr.placeholder]="this.user ? this.user.surname: ''"/>
+                    <!-- error -->
+                    <div
+                        class="invalid-feedback"
+                        *ngIf="submitted && myForm['surname'].errors?.['required']"
+                    >
+                        Surname is required.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputBirthdate">birthdate</label>
+                    <input class="form-control" type="text" onfocus="(this.type='date')" formControlName="birthdate" [attr.placeholder]="this.user ? this.user.birthdate : ''"/>
+                    <!-- error -->
+                    <div
+                        class="invalid-feedback"
+                        *ngIf="submitted && myForm['birthdate'].errors?.['required']"
+                    >
+                        Birthdate is required.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputUsertype">Gender</label>
+                    <select
+                        class="custom-select form-control"
+                        (change)="updateProfile($event.target.value)"
+                        formControlName="gender"
+                    >
+                        <option *ngIf="!user" value="">Choose...</option>
+                        <option *ngIf="user" value="" selected="selected"> {{ user.gender }} </option>
+                        <option
+                        *ngFor="let gend of gender"
+                        value="{{ gend }}"
+                        >
+                        {{ gend }}
+                        </option>
+                    </select>
+                    <!-- error -->
+                    <div
+                        class="invalid-feedback"
+                        *ngIf="submitted && myForm['gender'].errors?.['required']"
+                    >
+                        Choose gender.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input class="form-control" type="text" formControlName="email" [attr.placeholder]="this.user ? this.user.email : ''"/>
+                    <!-- error -->
+                    <div
+                        class="invalid-feedback"
+                        *ngIf="submitted && myForm['email'].errors?.['required']"
+                    >
+                        Enter your email.
+                    </div>
+                    <div
+                        class="invalid-feedback"
+                        *ngIf="submitted && myForm['email'].errors?.['pattern']"
+                    >
+                        Enter valid email.
+                    </div>
+                </div>
+                <div style="height: 2rem;"></div>
+                <div class="form-group">
+                    <button *ngIf="!user" class="btn btn-success btn-lg btn-block" type="submit">
+                      Register
+                    </button>
+                    <button *ngIf="user" class="btn btn-success btn-lg btn-block" type="submit">
+                      Update
+                    </button>
+                  </div>
+            </form>
+        </div>
+    </div>
+</div>

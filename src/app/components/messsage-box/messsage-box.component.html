@@ -1,0 +1,57 @@
+<div id="main-container">
+    <div class="InOutBox">
+        <span><button class="btn btn-primary" (click)="displayInbox()">Inbox</button></span>
+        <span><button class="btn btn-primary" (click)="displayOutbox()">Outbox</button></span>
+    </div>
+
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" (click)="drop()">
+        Sort by
+    </button>
+    <ul class="menu" id="options" style="display: none; list-style-type: none;">
+        <li><button class="btn btn-light btn-sm" style="margin-top: 0.1rem;" (click)="sortDate()">Date</button></li>
+        <li><button class="btn btn-light btn-sm" style="margin-top: 0.1rem;" (click)="sortUserName()">User</button></li>
+    </ul>
+
+    <div style="height: 0.2rem;"></div>
+    
+    <div class="container">
+        <table class="table table-bordered" *ngIf="MessageBox.length > 0">
+            <thead class="table-info">
+                <tr>
+                    <th *ngIf="BoxType == 'INBOX'" class="col">From</th>
+                    <th *ngIf="BoxType == 'OUTBOX'" class="col">To</th>
+                    <th class="col">At</th>
+                    <th class="col">Read</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let message of MessageBox; let i = index">
+                    <td *ngIf="BoxType == 'INBOX'">{{message.sender}}</td>
+                    <td *ngIf="BoxType == 'OUTBOX'">{{message.receiver}}</td>
+                    <td>{{message.date}}</td>
+                    <td>
+                        <span>
+                            <button type="button" class="btn btn-info" (click)="onRead(message, i)">Read</button>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="page-navigation" style="display: flex; justify-content:last baseline; gap: 0.5rem;">
+    <span>
+        <button type="button" class="btn btn-info" (click)="prevPage()">previous page</button>
+    </span>
+    <span>
+        <button type="button" class="btn btn-info" (click)="nextPage()">next page</button>
+    </span>
+</div>
+
+
+<div id="custom-modal" style="display: none;">
+    <div id="modal-content"></div>
+    <div style="height: 1rem;"></div>
+    <button type="button" class="btn btn-danger" id="modal-close" (click)="onCloseRead()">Close</button>
+</div>

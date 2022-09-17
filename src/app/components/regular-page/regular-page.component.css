@@ -1,0 +1,12 @@
+app-save-message {
+    width: 40%;
+}
+
+.user-operator {
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbar-nav {
+    gap: 1rem;
+}

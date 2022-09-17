@@ -1,0 +1,41 @@
+<div id="main-container" class="container" style="margin-top: 2rem;">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" (click)="drop()">
+        Sort by
+    </button>
+    <ul class="menu" id="options" style="display: none; list-style-type: none;">
+        <li><button class="btn btn-light btn-sm" style="margin-top: 0.1rem;" (click)="sortUser()">User</button></li>
+        <li><button class="btn btn-light btn-sm" style="margin-top: 0.1rem;" (click)="sortDate()">Date</button></li>
+        <li><button class="btn btn-light btn-sm" style="margin-top: 0.1rem;" (click)="sortOperation()">Operation</button></li>
+    </ul>
+
+    <div style="height: 0.4rem;"></div>
+    <table class="table table-bordered">
+        <thead class="table-info">
+            <tr>
+                <th class="col">User</th>
+                <th class="col">Operation</th>
+                <th class="col">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let log of logList; let i = index">
+                <td>{{log.username}}</td>
+                <td>{{log.optype}}</td>
+                <td>{{log.date}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div style="display: flex; justify-content: space-around;">
+    <span routerLink='/admin'>
+        <button type="button" class="btn btn-danger">Back To Main Page</button>
+    </span>
+    <div id="page-navigation" style="display: flex; justify-content:last baseline; gap: 0.5rem;">
+        <span>
+            <button type="button" class="btn btn-info" (click)="prevPage()">previous page</button>
+        </span>
+        <span>
+            <button type="button" class="btn btn-info" (click)="nextPage()">next page</button>
+        </span>
+    </div>
+</div>
